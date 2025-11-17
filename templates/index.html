@@ -24,11 +24,8 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { 
-            scroll-behavior: smooth; /* 1. MEJORA: Scroll suave para todos los links */
-        }
+        html { scroll-behavior: smooth; }
         body, html { width: 100%; min-height: 100%; }
-
         body {
             font-family: 'Lato', sans-serif;
             background-color: var(--color-fondo-oscuro);
@@ -49,36 +46,34 @@
         }
         header h1 { font-size: 1.75rem; font-weight: 700; color: var(--color-primario); }
 
-        /* (Contenido Principal - Padding modificado) */
+        /* (Main y Títulos - Sin cambios) */
         main {
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 2.5rem 1.5rem; /* 2. MEJORA: Menos padding lateral para móviles */
+            padding: 2.5rem 1.5rem;
             width: 100%;
         }
         .titulo-dashboard { font-size: 2.5rem; font-weight: 300; margin-bottom: 0.5rem; text-align: center; }
         .subtitulo-dashboard { font-size: 1.1rem; font-weight: 400; color: var(--color-texto-secundario); margin-bottom: 2.5rem; text-align: center; }
 
-        /* (Controles Dashboard - Sin cambios) */
+        /* (Controles y Botones - Sin cambios) */
         .dashboard-controls {
             display: flex;
             justify-content: center;
             gap: 1rem; 
             margin-bottom: 2.5rem;
             flex-wrap: wrap; 
-            width: 100%; /* Ocupa todo el ancho para centrar bien */
+            width: 100%;
         }
-
-        /* 3. MEJORA: Botones con iconos */
         .btn-interactivo {
             font-family: 'Lato', sans-serif;
             text-decoration: none; 
-            display: inline-flex; /* Permite alinear el icono y el texto */
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 0.6rem; /* Espacio entre icono y texto */
+            gap: 0.6rem; 
             padding: 0.75rem 1.5rem;
             font-size: 1rem;
             font-weight: 700;
@@ -96,15 +91,11 @@
             box-shadow: var(--sombra-fuerte);
             filter: brightness(1.1); 
         }
-        /* Estilo para los iconos (usamos emojis/símbolos) */
-        .btn-interactivo .icon {
-            font-size: 1.2em; /* Un poco más grande que el texto */
-            line-height: 1;
-        }
+        .btn-interactivo .icon { font-size: 1.2em; line-height: 1; }
         
-        /* (Detalles del Proyecto - Sin cambios) */
+        /* ======== 1. MODIFICADO: DETALLES DEL PROYECTO ======== */
         .project-details {
-            width: 100%; /* Ocupa todo el ancho del 'main' */
+            width: 100%;
             max-width: 1200px; 
             background-color: var(--color-superficie);
             border-radius: var(--radio-borde);
@@ -119,23 +110,90 @@
             transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
         .project-details.details-visible {
-            max-height: 1000px; 
+            /* Aumentamos la altura máxima para el nuevo contenido */
+            max-height: 2500px; /* Suficiente para todo el texto */
             opacity: 1;
             padding: 2rem 2.5rem; 
             margin-bottom: 2.5rem; 
         }
-        .project-details h3 { font-size: 1.75rem; font-weight: 700; color: var(--color-primario); margin-bottom: 1.25rem; border-bottom: 1px solid rgba(52, 152, 219, 0.3); padding-bottom: 0.75rem; }
-        .project-details p { font-size: 1.1rem; line-height: 1.7; color: var(--color-texto-secundario); margin-bottom: 1.5rem; }
-        .project-details ul { list-style: none; padding-left: 0; }
-        .project-details li { font-size: 1.1rem; line-height: 1.7; color: var(--color-texto-secundario); margin-bottom: 0.75rem; display: flex; align-items: flex-start; }
-        .project-details li::before { content: '✓'; color: var(--color-primario); font-weight: 700; font-size: 1.2rem; margin-right: 0.75rem; flex-shrink: 0; }
+        
+        /* Estilos para el nuevo contenido */
+        .project-details h3 { 
+            font-size: 1.75rem; 
+            font-weight: 700; 
+            color: var(--color-primario); 
+            margin-top: 2rem; /* Espacio entre secciones */
+            margin-bottom: 1.25rem; 
+            border-bottom: 1px solid rgba(52, 152, 219, 0.3); 
+            padding-bottom: 0.75rem; 
+        }
+        .project-details h3:first-of-type {
+            margin-top: 0; /* Sin espacio superior para el primer título */
+        }
+        .project-details h4 { /* Para los subtítulos del Storytelling */
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-texto-principal);
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .project-details p { 
+            font-size: 1.1rem; 
+            line-height: 1.7; 
+            color: var(--color-texto-secundario); 
+            margin-bottom: 1.5rem; 
+        }
+        .project-details ul { 
+            list-style: none; 
+            padding-left: 0; 
+            margin-bottom: 1rem;
+        }
+        .project-details li { 
+            font-size: 1.1rem; 
+            line-height: 1.7; 
+            color: var(--color-texto-secundario); 
+            margin-bottom: 0.75rem; 
+            display: flex; 
+            align-items: flex-start; 
+        }
+        /* Icono de check para objetivos */
+        .project-details .check-list li::before { 
+            content: '✓'; 
+            color: var(--color-primario); 
+            font-weight: 700; 
+            font-size: 1.2rem; 
+            margin-right: 0.75rem; 
+            flex-shrink: 0; 
+        }
+        /* Icono de 'tuerca' para componentes */
+        .project-details .component-list li::before { 
+            content: '⚙️'; /* Emoji de engranaje */
+            font-size: 1rem; 
+            margin-right: 0.75rem; 
+            flex-shrink: 0;
+            margin-top: 4px; /* Alineación vertical */
+        }
+         /* Icono de 'página' para estructura */
+        .project-details .page-list li::before { 
+            content: '📄'; /* Emoji de página */
+            font-size: 1rem; 
+            margin-right: 0.75rem; 
+            flex-shrink: 0;
+            margin-top: 4px;
+        }
+        /* Citas del documento */
+        .citation {
+            color: var(--color-secundario);
+            font-size: 0.8rem;
+            margin-left: 4px;
+        }
 
-        /* (Dashboard Container - Modificado) */
+        /* (Dashboard Container - Sin cambios) */
         .dashboard-container {
-            width: 100%; /* Ocupa todo el ancho del 'main' */
+            width: 100%;
             max-width: 1600px; 
-            height: 85vh; /* Altura relativa */
-            min-height: 500px; /* Altura mínima para que no colapse */
+            height: 85vh; 
+            min-height: 500px;
             background-color: var(--color-superficie);
             border-radius: var(--radio-borde);
             box-shadow: var(--sombra-fuerte);
@@ -147,63 +205,38 @@
         iframe { width: 100%; height: 100%; border: none; }
         @keyframes aparecer { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* (Footer - Modificado) */
+        /* (Footer - Sin cambios) */
         footer {
             width: 100%;
             text-align: center;
-            padding: 2rem 1.5rem; /* Más padding */
+            padding: 2rem 1.5rem; 
             background-color: var(--color-superficie);
             border-top: 1px solid #2a2a2a;
             color: var(--color-texto-secundario);
             font-size: 0.9rem;
             margin-top: 2.5rem;
             flex-shrink: 0;
-            line-height: 1.6; /* Mejor espaciado de líneas */
+            line-height: 1.6;
         }
-        footer span { /* Para separar los nombres */
-            display: block;
-            margin-top: 0.5rem;
-        }
+        footer span { display: block; margin-top: 0.5rem; }
 
-        /* ======== 4. NUEVO: MEDIA QUERIES PARA RESPONSIVIDAD ======== */
+        /* (Media Queries - Sin cambios) */
         @media (max-width: 768px) {
-            
-            /* Reduce tamaño de fuentes principales */
             .titulo-dashboard { font-size: 1.8rem; }
             .subtitulo-dashboard { font-size: 1rem; }
             header h1 { font-size: 1.25rem; }
-
-            /* Ajusta paddings principales */
             header { padding: 1rem 1.5rem; }
-            main { padding: 1.5rem; } /* Menos padding en 'main' */
-            
-            /* Botones ocupan todo el ancho y se centran */
-            .dashboard-controls {
-                flex-direction: column; /* Se apilan verticalmente */
-                gap: 0.75rem; /* Menos espacio */
-            }
-            .btn-interactivo {
-                width: 100%; /* Ocupan todo el ancho */
-                padding: 1rem; /* Más fáciles de presionar */
-            }
-
-            /* Ajuste en padding de detalles */
+            main { padding: 1.5rem; }
+            .dashboard-controls { flex-direction: column; gap: 0.75rem; }
+            .btn-interactivo { width: 100%; padding: 1rem; }
             .project-details.details-visible {
                 padding: 1.5rem 1.25rem;
+                max-height: 4000px; /* Aumentamos también en móvil */
             }
             .project-details h3 { font-size: 1.4rem; }
             .project-details p, .project-details li { font-size: 1rem; }
-
-            /* Ajuste de altura del dashboard en móviles */
-            .dashboard-container {
-                height: 75vh; /* Un poco menos de altura */
-            }
-
-            /* Nombres del footer se apilan */
-            footer span {
-                display: block;
-                margin-top: 0.25rem;
-            }
+            .dashboard-container { height: 75vh; }
+            footer span { display: block; margin-top: 0.25rem; }
         }
 
     </style>
@@ -221,36 +254,94 @@
 
         <div class="dashboard-controls">
             <button id="btn-scroll" class="btn-interactivo">
-                <span class="icon">&#x21A9;</span> Ver Dashboard
+                <span class="icon">&#x21A9;</span>
+                Ver Dashboard
             </button>
-            
             <button id="btn-toggle-details" class="btn-interactivo btn-secundario">
-                <span class="icon">&#x1F4C4;</span> Detalles del Proyecto
+                <span class="icon">&#x1F4C4;</span>
+                Detalles del Proyecto
             </button>
-
             <a href="#" id="btn-video" class="btn-interactivo btn-secundario">
-                <span class="icon">&#x25B6;</span> Ver Video
+                <span class="icon">&#x25B6;</span>
+                Ver Video
             </a>
         </div>
 
 
         <div class="project-details">
+            
             <h3>Acerca de este Proyecto</h3>
             <p>
-                Este es un dashboard analítico en Power BI enfocado en el monitoreo de la calidad del aire y variables ambientales clave. El objetivo principal es transformar datos brutos en inteligencia de negocio...
+                Este es un dashboard analítico en Power BI enfocado en el monitoreo de la calidad del aire y variables ambientales clave como CO2, PM25, Humedad y Temperatura. <span class="citation">[cite: 25, 26]</span>
+                El objetivo principal es transformar datos brutos en inteligencia de negocio, permitiendo a los usuarios no solo conocer el estado del sistema, sino también diagnosticar las causas de anomalías y proponer acciones preventivas basadas en tendencias temporales. <span class="citation">[cite: 27]</span>
             </p>
 
             <h3>Objetivos del Tablero</h3>
+            <ul class="check-list">
+                <li>Presentar las métricas de volumen y rendimiento del sistema en la página "Resumen General". <span class="citation">[cite: 29]</span></li>
+                <li>Identificar la ubicación y la fuente específica de los eventos críticos mediante el análisis de correlación y geográfico. <span class="citation">[cite: 30]</span></li>
+                <li>Determinar patrones temporales para establecer protocolos de intervención preventiva. <span class="citation">[cite: 31]</span></li>
+            </ul>
+
+            <h3>Componentes Tecnológicos</h3>
+            <p>
+                La arquitectura del proyecto se basa en varios componentes clave para la ingesta, almacenamiento y visualización de datos:
+            </p>
+            <ul class="component-list">
+                <li>
+                    <strong>Base de Datos:</strong> Se utiliza un sistema en <strong>SQL Server</strong> para alojar las bases de datos transaccionales y el data warehouse. <span class="citation">[cite: 1]</span>
+                </li>
+                <li>
+                    <strong>Modelo de Datos:</strong> El núcleo del análisis es un <strong>Esquema de Estrella</strong>, diseñado para optimizar el rendimiento y la flexibilidad. Consiste en una tabla de hechos central (`Hecho_CalidadAire`) y dimensiones que proveen contexto (`Dim_Usuario`, `Dim_Departamento`, `Dim_Tiempo`). <span class="citation">[cite: 34, 35, 41, 42, 43]</span>
+                </li>
+                <li>
+                    <strong>Visualización (BI):</strong> La herramienta seleccionada para el análisis y la creación del tablero es <strong>Power BI</strong>. <span class="citation">[cite: 25]</span>
+                </li>
+                <li>
+                    <strong>Plataforma Web:</strong> Este sitio web actúa como un contenedor para el dashboard, construido con <strong>Python (Flask)</strong> y desplegado en la nube a través de <strong>Render.com</strong>.
+                </li>
+            </ul>
+
+            <h3>Estructura del Dashboard</h3>
+            <p>
+                El tablero en Power BI se divide en 3 páginas que guían al usuario a través de un flujo analítico claro, desde la visión general hasta la acción específica: <span class="citation">[cite: 52]</span>
+            </p>
+            <ul class="page-list">
+                <li><strong>Página 1: Resumen General</strong> - Responde al "¿Qué está ocurriendo?" con KPIs globales. <span class="citation">[cite: 53]</span></li>
+                <li><strong>Página 2: Análisis Detallado</strong> - Responde al "¿Por qué ocurre?" usando mapas y correlaciones. <span class="citation">[cite: 55]</span></li>
+                <li><strong>Página 3: Tendencias Temporales</strong> - Responde al "¿Qué puede hacerse?" analizando patrones en el tiempo. <span class="citation">[cite: 57]</span></li>
+            </ul>
+
+             <h3>El "Storytelling" de los Datos</h3>
+            <p>
+                Para transformar los datos en una narrativa coherente, se crearon medidas DAX específicas agrupadas por el tipo de pregunta que responden: <span class="citation">[cite: 44]</span>
+            </p>
+            
+            <h4>¿Qué está ocurriendo? (Análisis Descriptivo)</h4>
+            <p>Métricas que miden el volumen y estado actual del sistema.</p>
             <ul>
-                <li>Presentar las métricas de volumen y rendimiento del sistema...</li>
-                <li>Identificar la ubicación y la fuente específica de los eventos críticos...</li>
-                <li>Determinar patrones temporales para establecer protocolos de intervención preventiva.</li>
+                <li><strong>Total Registros Hecho:</strong> Cuenta el volumen total de mediciones. <span class="citation">[cite: 46]</span></li>
+                <li><strong>Promedio CO2 / Promedio PM25:</strong> KPIs primarios del estado general de la calidad del aire. <span class="citation">[cite: 46]</span></li>
+            </ul>
+
+            <h4>¿Por qué ocurre? (Análisis de Diagnóstico)</h4>
+            <p>Métricas que comparan y aíslan las causas raíz.</p>
+            <ul>
+                <li><strong>Promedio Temp por Departamento:</strong> Identifica zonas geográficas con anomalías. <span class="citation">[cite: 48]</span></li>
+                <li><strong>Máximo CO2 Registrado:</strong> Detecta el pico de riesgo histórico. <span class="citation">[cite: 48]</span></li>
+            </ul>
+
+            <h4>¿Qué puede hacerse? (Análisis Prescriptivo)</h4>
+            <p>Métricas que identifican tendencias para la acción preventiva.</p>
+            <ul>
+                <li><strong>Recuentos CO2 Alto:</strong> Mide la frecuencia de eventos de alto riesgo (CO2 > 800). <span class="citation">[cite: 50]</span></li>
+                <li><strong>Promedio CO2 Móvil 7 Días:</strong> Suaviza la tendencia para proyectar la dirección del riesgo a largo plazo. <span class="citation">[cite: 50]</span></li>
             </ul>
         </div>
 
 
         <div id="dashboard-area" class="dashboard-container">
-            <iframe title="ProyectoAire" width="600" height="373.5" src="https://app.powerbi.com/view?r=eyJrIjoiOTZjYzg2ODYtZTZmYy00ZTljLTgzNWMtZjE4NzRkMTM5MDE5IiwidCI6IjA3ZGE2N2EwLTFmNDMtNGU4Yy05NzdmLTVmODhiNjQ3MGVlNiIsImMiOjR9" frameborder="0" allowFullScreen="true"></iframe>
+           <iframe title="ProyectoAire" width="600" height="373.5" src="https://app.powerbi.com/view?r=eyJrIjoiOTZjYzg2ODYtZTZmYy00ZTljLTgzNWMtZjE4NzRkMTM5MDE5IiwidCI6IjA3ZGE2N2EwLTFmNDMtNGU4Yy05NzdmLTVmODhiNjQ3MGVlNiIsImMiOjR9" frameborder="0" allowFullScreen="true"></iframe>
         </div>
 
     </main>
@@ -263,23 +354,15 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-
-            // --- Interacción 1: Botón de Scroll ---
             const scrollBtn = document.getElementById('btn-scroll');
             const dashboardArea = document.getElementById('dashboard-area');
-
             scrollBtn.addEventListener('click', (e) => {
-                e.preventDefault(); // Previene comportamiento por defecto
-                dashboardArea.scrollIntoView({ 
-                    behavior: 'smooth',
-                    block: 'start' 
-                });
+                e.preventDefault(); 
+                dashboardArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
 
-            // --- Interacción 2: Botón de Mostrar/Ocultar Detalles ---
             const toggleBtn = document.getElementById('btn-toggle-details');
             const detailsSection = document.querySelector('.project-details');
-
             toggleBtn.addEventListener('click', () => {
                 detailsSection.classList.toggle('details-visible');
                 if (detailsSection.classList.contains('details-visible')) {
@@ -289,17 +372,14 @@
                 }
             });
 
-            // --- Interacción 3: Botón de Video (Actualiza el link) ---
             const videoBtn = document.getElementById('btn-video');
             videoBtn.addEventListener('click', (e) => {
-                // CAMBIA '#' POR EL ENLACE REAL DE TU VIDEO
                 const videoURL = '#'; 
-                
                 if (videoURL === '#') {
-                    e.preventDefault(); // Evita que salte al inicio de la página
+                    e.preventDefault(); 
                     alert('Aún no se ha agregado el enlace del video.');
                 } else {
-                    videoBtn.target = '_blank'; // Abre en una nueva pestaña
+                    videoBtn.target = '_blank';
                     videoBtn.href = videoURL;
                 }
             });
