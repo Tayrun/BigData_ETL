@@ -15,7 +15,7 @@
             --color-fondo-oscuro: #121212;
             --color-superficie: #1e1e1e;
             --color-primario: #3498db; 
-            --color-secundario: #5a6a7a; /* Un gris-azul para botones secundarios */
+            --color-secundario: #5a6a7a; 
             --color-texto-principal: #ffffff;
             --color-texto-secundario: #b3b3b3;
             --sombra-fuerte: 0 10px 25px rgba(0, 0, 0, 0.5);
@@ -24,6 +24,9 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { 
+            scroll-behavior: smooth; /* 1. MEJORA: Scroll suave para todos los links */
+        }
         body, html { width: 100%; min-height: 100%; }
 
         body {
@@ -46,31 +49,36 @@
         }
         header h1 { font-size: 1.75rem; font-weight: 700; color: var(--color-primario); }
 
-        /* (Contenido Principal - Sin cambios) */
+        /* (Contenido Principal - Padding modificado) */
         main {
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 2.5rem;
+            padding: 2.5rem 1.5rem; /* 2. MEJORA: Menos padding lateral para móviles */
             width: 100%;
         }
         .titulo-dashboard { font-size: 2.5rem; font-weight: 300; margin-bottom: 0.5rem; text-align: center; }
         .subtitulo-dashboard { font-size: 1.1rem; font-weight: 400; color: var(--color-texto-secundario); margin-bottom: 2.5rem; text-align: center; }
 
-        /* ======== 1. NUEVO: ESTILOS PARA BOTONES INTERACTIVOS ======== */
+        /* (Controles Dashboard - Sin cambios) */
         .dashboard-controls {
             display: flex;
             justify-content: center;
-            gap: 1rem; /* Espacio entre botones */
+            gap: 1rem; 
             margin-bottom: 2.5rem;
-            flex-wrap: wrap; /* Para que se ajusten en móviles */
+            flex-wrap: wrap; 
+            width: 100%; /* Ocupa todo el ancho para centrar bien */
         }
 
+        /* 3. MEJORA: Botones con iconos */
         .btn-interactivo {
             font-family: 'Lato', sans-serif;
-            text-decoration: none; /* Para los que son enlaces <a> */
-            display: inline-block;
+            text-decoration: none; 
+            display: inline-flex; /* Permite alinear el icono y el texto */
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem; /* Espacio entre icono y texto */
             padding: 0.75rem 1.5rem;
             font-size: 1rem;
             font-weight: 700;
@@ -82,82 +90,120 @@
             transition: all 0.3s ease;
             box-shadow: var(--sombra-suave);
         }
-
-        /* Estilo secundario para botones de "detalles" o "video" */
-        .btn-interactivo.btn-secundario {
-            background-color: var(--color-secundario);
-        }
-
+        .btn-interactivo.btn-secundario { background-color: var(--color-secundario); }
         .btn-interactivo:hover {
-            transform: translateY(-3px); /* Efecto "levantar" */
+            transform: translateY(-3px); 
             box-shadow: var(--sombra-fuerte);
-            filter: brightness(1.1); /* Más brillante */
+            filter: brightness(1.1); 
+        }
+        /* Estilo para los iconos (usamos emojis/símbolos) */
+        .btn-interactivo .icon {
+            font-size: 1.2em; /* Un poco más grande que el texto */
+            line-height: 1;
         }
         
-        /* ======== 2. MODIFICADO: DETALLES DEL PROYECTO (AHORA OCULTO POR DEFECTO) ======== */
+        /* (Detalles del Proyecto - Sin cambios) */
         .project-details {
-            width: 95%;
+            width: 100%; /* Ocupa todo el ancho del 'main' */
             max-width: 1200px; 
             background-color: var(--color-superficie);
             border-radius: var(--radio-borde);
             box-shadow: var(--sombra-suave);
             text-align: left;
-            
-            /* --- La Magia de la Transición --- */
-            /* Oculto por defecto */
             overflow: hidden;
             max-height: 0;
             opacity: 0;
             padding-top: 0;
             padding-bottom: 0;
             margin-bottom: 0;
-            transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1); /* Transición suave */
+            transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
-
-        /* Clase que se añadirá con JavaScript */
         .project-details.details-visible {
-            max-height: 1000px; /* Alto máximo (debe ser mayor que el contenido) */
+            max-height: 1000px; 
             opacity: 1;
-            padding: 2rem 2.5rem; /* Restaura el padding */
-            margin-bottom: 2.5rem; /* Restaura el margen */
+            padding: 2rem 2.5rem; 
+            margin-bottom: 2.5rem; 
         }
-        /* (Estilos internos de .project-details - Sin cambios) */
         .project-details h3 { font-size: 1.75rem; font-weight: 700; color: var(--color-primario); margin-bottom: 1.25rem; border-bottom: 1px solid rgba(52, 152, 219, 0.3); padding-bottom: 0.75rem; }
         .project-details p { font-size: 1.1rem; line-height: 1.7; color: var(--color-texto-secundario); margin-bottom: 1.5rem; }
         .project-details ul { list-style: none; padding-left: 0; }
         .project-details li { font-size: 1.1rem; line-height: 1.7; color: var(--color-texto-secundario); margin-bottom: 0.75rem; display: flex; align-items: flex-start; }
         .project-details li::before { content: '✓'; color: var(--color-primario); font-weight: 700; font-size: 1.2rem; margin-right: 0.75rem; flex-shrink: 0; }
 
-        /* (Contenedor Dashboard - Modificado para animación) */
+        /* (Dashboard Container - Modificado) */
         .dashboard-container {
-            width: 95%;
+            width: 100%; /* Ocupa todo el ancho del 'main' */
             max-width: 1600px; 
-            height: 85vh; 
+            height: 85vh; /* Altura relativa */
+            min-height: 500px; /* Altura mínima para que no colapse */
             background-color: var(--color-superficie);
             border-radius: var(--radio-borde);
             box-shadow: var(--sombra-fuerte);
             overflow: hidden; 
-
-            /* Animación de entrada */
             opacity: 0;
             transform: translateY(20px);
-            animation: aparecer 0.8s ease-out 0.5s forwards; /* 0.5s de retraso */
+            animation: aparecer 0.8s ease-out 0.5s forwards;
         }
-        
         iframe { width: 100%; height: 100%; border: none; }
         @keyframes aparecer { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* (Footer - Sin cambios) */
+        /* (Footer - Modificado) */
         footer {
             width: 100%;
             text-align: center;
-            padding: 1.5rem;
+            padding: 2rem 1.5rem; /* Más padding */
             background-color: var(--color-superficie);
             border-top: 1px solid #2a2a2a;
             color: var(--color-texto-secundario);
             font-size: 0.9rem;
             margin-top: 2.5rem;
             flex-shrink: 0;
+            line-height: 1.6; /* Mejor espaciado de líneas */
+        }
+        footer span { /* Para separar los nombres */
+            display: block;
+            margin-top: 0.5rem;
+        }
+
+        /* ======== 4. NUEVO: MEDIA QUERIES PARA RESPONSIVIDAD ======== */
+        @media (max-width: 768px) {
+            
+            /* Reduce tamaño de fuentes principales */
+            .titulo-dashboard { font-size: 1.8rem; }
+            .subtitulo-dashboard { font-size: 1rem; }
+            header h1 { font-size: 1.25rem; }
+
+            /* Ajusta paddings principales */
+            header { padding: 1rem 1.5rem; }
+            main { padding: 1.5rem; } /* Menos padding en 'main' */
+            
+            /* Botones ocupan todo el ancho y se centran */
+            .dashboard-controls {
+                flex-direction: column; /* Se apilan verticalmente */
+                gap: 0.75rem; /* Menos espacio */
+            }
+            .btn-interactivo {
+                width: 100%; /* Ocupan todo el ancho */
+                padding: 1rem; /* Más fáciles de presionar */
+            }
+
+            /* Ajuste en padding de detalles */
+            .project-details.details-visible {
+                padding: 1.5rem 1.25rem;
+            }
+            .project-details h3 { font-size: 1.4rem; }
+            .project-details p, .project-details li { font-size: 1rem; }
+
+            /* Ajuste de altura del dashboard en móviles */
+            .dashboard-container {
+                height: 75vh; /* Un poco menos de altura */
+            }
+
+            /* Nombres del footer se apilan */
+            footer span {
+                display: block;
+                margin-top: 0.25rem;
+            }
         }
 
     </style>
@@ -175,15 +221,15 @@
 
         <div class="dashboard-controls">
             <button id="btn-scroll" class="btn-interactivo">
-                Ver Dashboard
+                <span class="icon">&#x21A9;</span> Ver Dashboard
             </button>
             
             <button id="btn-toggle-details" class="btn-interactivo btn-secundario">
-                Detalles del Proyecto
+                <span class="icon">&#x1F4C4;</span> Detalles del Proyecto
             </button>
 
             <a href="#" id="btn-video" class="btn-interactivo btn-secundario">
-                Ver Video
+                <span class="icon">&#x25B6;</span> Ver Video
             </a>
         </div>
 
@@ -204,53 +250,59 @@
 
 
         <div id="dashboard-area" class="dashboard-container">
-         <iframe title="ProyectoAire" width="600" height="373.5" src="https://app.powerbi.com/view?r=eyJrIjoiOTZjYzg2ODYtZTZmYy00ZTljLTgzNWMtZjE4NzRkMTM5MDE5IiwidCI6IjA3ZGE2N2EwLTFmNDMtNGU4Yy05NzdmLTVmODhiNjQ3MGVlNiIsImMiOjR9" frameborder="0" allowFullScreen="true"></iframe>   
+            <iframe title="ProyectoAire" width="600" height="373.5" src="https://app.powerbi.com/view?r=eyJrIjoiOTZjYzg2ODYtZTZmYy00ZTljLTgzNWMtZjE4NzRkMTM5MDE5IiwidCI6IjA3ZGE2N2EwLTFmNDMtNGU4Yy05NzdmLTVmODhiNjQ3MGVlNiIsImMiOjR9" frameborder="0" allowFullScreen="true"></iframe>
         </div>
 
     </main>
 
     <footer>
-        &copy; 2025 | Ingrid K. Caicedo Rodríguez & Juan J. Ibáñez Martínez
+        Estudiantes: Ingrid K. Caicedo Rodríguez & Juan J. Ibáñez Martínez
+        <span>Gestor del Conocimiento: Edison Gustavo Canon Varela</span>
+        <span>&copy; 2025 | Universidad de Cundinamarca - Extensión Chía</span>
     </footer>
 
     <script>
-        // Espera a que todo el contenido de la página esté cargado
         document.addEventListener('DOMContentLoaded', () => {
 
             // --- Interacción 1: Botón de Scroll ---
             const scrollBtn = document.getElementById('btn-scroll');
             const dashboardArea = document.getElementById('dashboard-area');
 
-            scrollBtn.addEventListener('click', () => {
-                // Le dice al área del dashboard que se ponga en vista
-                // con un comportamiento "suave" (smooth)
+            scrollBtn.addEventListener('click', (e) => {
+                e.preventDefault(); // Previene comportamiento por defecto
                 dashboardArea.scrollIntoView({ 
                     behavior: 'smooth',
-                    block: 'start' // Se alinea con la parte de arriba
+                    block: 'start' 
                 });
             });
-
 
             // --- Interacción 2: Botón de Mostrar/Ocultar Detalles ---
             const toggleBtn = document.getElementById('btn-toggle-details');
             const detailsSection = document.querySelector('.project-details');
 
             toggleBtn.addEventListener('click', () => {
-                // Añade o quita la clase 'details-visible'
                 detailsSection.classList.toggle('details-visible');
-
-                // Opcional: Cambia el texto del botón
                 if (detailsSection.classList.contains('details-visible')) {
-                    toggleBtn.textContent = 'Ocultar Detalles';
+                    toggleBtn.innerHTML = '<span class="icon">&#x1F4C4;</span> Ocultar Detalles';
                 } else {
-                    toggleBtn.textContent = 'Detalles del Proyecto';
+                    toggleBtn.innerHTML = '<span class="icon">&#x1F4C4;</span> Detalles del Proyecto';
                 }
             });
 
-            // Nota: El botón de "Ver Video" es un enlace <a> y
-            // funcionará por sí solo. ¡Solo recuerda cambiar el 'href="#"'
-            // por el enlace real de tu video!
-
+            // --- Interacción 3: Botón de Video (Actualiza el link) ---
+            const videoBtn = document.getElementById('btn-video');
+            videoBtn.addEventListener('click', (e) => {
+                // CAMBIA '#' POR EL ENLACE REAL DE TU VIDEO
+                const videoURL = '#'; 
+                
+                if (videoURL === '#') {
+                    e.preventDefault(); // Evita que salte al inicio de la página
+                    alert('Aún no se ha agregado el enlace del video.');
+                } else {
+                    videoBtn.target = '_blank'; // Abre en una nueva pestaña
+                    videoBtn.href = videoURL;
+                }
+            });
         });
     </script>
 
